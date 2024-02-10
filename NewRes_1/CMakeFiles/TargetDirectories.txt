@@ -1,3 +1,0 @@
-C:/Users/Николай/Desktop/NewRes1/CMakeFiles/laba1.dir
-C:/Users/Николай/Desktop/NewRes1/CMakeFiles/ALL_BUILD.dir
-C:/Users/Николай/Desktop/NewRes1/CMakeFiles/ZERO_CHECK.dir
