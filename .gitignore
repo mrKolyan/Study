@@ -5,6 +5,7 @@
 
 #jpg files!!!
 *.jpg
+!aboba2.jpg
 
 # User-specific files
 *.rsuser
