@@ -1,3 +1,0 @@
-﻿  main.cpp
-C:\Users\Николай\Documents\GitHub\Study\Res_2\Laba2\main.cpp(15,24): warning C4244: инициализация: преобразование "double" в "unsigned short", возможна потеря данных
-  Laba2.vcxproj -> C:\Users\Николай\Documents\GitHub\Study\Res_2\x64\Debug\Laba2.exe
