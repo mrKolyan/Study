@@ -7,13 +7,12 @@ const unsigned int height = 768;
 
 class mytext {
 private:
-    sf::Font font1;
-    sf::Font font2;
-    sf::Font font3;
-    sf::Font font4;
+    sf::Font fonts[4];
+
     sf::Text m_text;
 
     sf::Clock clock; 
+    sf::Clock clock2;
 
     std::string m_str;
     std::string output; 
@@ -21,7 +20,7 @@ private:
  
     int m_num = 0;
     bool flag;
-    bool aud = 0;
+    bool aud = 1;
     float m_time;
     float m_x = 50;
     float m_y = 350;
@@ -35,34 +34,23 @@ public:
         setup(str,t);
     }
     int setup(std::string str, float t) {
-        if (!font1.loadFromFile("fonts/arial.ttf")) {
-            std::cout << "font error1";
-            return 0;
+        
+        for (int i = 0; i < 4; i++) {
+            if (!fonts[i].loadFromFile(std::string("fonts/font" + std::to_string(i)+ ".ttf"))) {
+                std::cout << "font error";
+            }
         }
-        if (!font2.loadFromFile("fonts/Gabriola.ttf")) {
-            std::cout << "font error2";
-            return 0;
-        }
-        if (!font3.loadFromFile("fonts/impact.ttf")) {
-            std::cout << "font error3";
-            return 0;
-        }
-        if (!font4.loadFromFile("fonts/courbd.ttf")) {
-            std::cout << "font error4";
-            return 0;
-        }
-        if (!audio.loadFromFile("sound/applause.wav")) {
-            std::cout << "audio error";
-            return -1;
-        }
+       
+       
         sound.setBuffer(audio);
         m_time = t;
         m_str = str;
         m_text.setColor(sf::Color(230, 230, 230, 255));
         m_text.setPosition(m_x, m_y);
-        m_text.setFont(font1);
+        m_text.setFont(fonts[0]);
         m_text.setCharacterSize(50);
         m_dt = m_time / m_str.length();
+        clock2.restart();
         return 1;
     }
     void verbAnimationText() {
@@ -77,20 +65,7 @@ public:
                         flag = 0;
                 }
                 if (flag) {
-                    switch ((m_num + 17) % 4) {
-                    case 0:
-                        m_text.setFont(font1);
-                        break;
-                    case 1:
-                        m_text.setFont(font2);
-                        break;
-                    case 2:
-                        m_text.setFont(font3);
-                        break;
-                    case 3:
-                        m_text.setFont(font4);
-                        break;
-                    }
+                    m_text.setFont(fonts[m_num % 4]);
                 }
                 flag = 1;
                 m_num++;
@@ -99,6 +74,7 @@ public:
         else if (aud) {
             sound.play();
             aud = 0;
+            std::cout << clock2.getElapsedTime().asSeconds();
         }
     }
     sf::Text get() {
@@ -110,11 +86,10 @@ public:
 
 int main()
 {
-    srand(time(0));
     sf::RenderWindow window(sf::VideoMode(width, height), "LABA WORKS!!!");
     window.display();
-    mytext text1(std::string("aboba    aboba4565aboba"), 10);
-
+    mytext text1(std::string("aboba    aboba4565aboba"), 15);
+    sf::Clock clock;
     while (window.isOpen())
     {
         sf::Event event;
